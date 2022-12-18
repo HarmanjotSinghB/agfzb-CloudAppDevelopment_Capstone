@@ -17,33 +17,25 @@
     <body>
     
      This is the index page of your Django app!
-     <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Best Cars</a>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                <li>
-                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
-                    <a class="btn btn-link" href="{% url 'bestcars:logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li>
-                    <form class="form-inline" action="{% url 'bestcars:login' %}" method="post">
-                        {% csrf_token %}
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Username" name="username" >
-                            <input type="password" class="form-control" placeholder="Password" name="psw" >
-                            <button class="btn btn-primary" type="submit">Login</button>
-                            <a class="btn btn-link" href="{% url 'bestcars:registration' %}">Sign Up</a>
-                        </div>
-                    </form>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
+     <header class="pb-5">
+        <nav class=" navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class=" navbar-brand" href="{% url 'djangoapp:index' %}">Best Cars &#128663;</a>
+            {% if user.is_authenticated %}
+            <div class="ml-auto">
+                <a class="h6 mr-2 text-light">Welcome, {{user.username}}</a>
+                <a class="btn btn-outline-danger btn-sm" type="button" href="{% url 'djangoapp:logout' %}">Logout</a>
+            </div> 
+            {% else %}
+            <form action="{% url 'djangoapp:login' %}"  method="post" class="ml-auto">
+                {% csrf_token %}<!--Important do not touch-->
+                <input class="" type="text" id="username" name="username" placeholder="UserName:">
+                <input type="password" id="pword" name="pword" placeholder="Password:">
+                <input class="btn btn-outline-success btn-sm" type="submit" value="Login">
+                <a class="btn btn-outline-warning btn-sm" type="submit" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+            </form>
+            {% endif %}
+        </nav>
+    </header>
 
     <!--Add a dealer table here -->
 
